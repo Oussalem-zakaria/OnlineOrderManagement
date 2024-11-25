@@ -8,7 +8,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/Oussalem-zakaria/config-repo.git
+          uri: https://github.com/Oussalem-zakaria/OnlineOrderManagementConfig.git
           clone-on-start: true
 
 eureka:
