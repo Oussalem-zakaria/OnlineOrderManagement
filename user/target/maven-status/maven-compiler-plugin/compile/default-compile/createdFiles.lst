@@ -1,0 +1,8 @@
+com\fortest\myorders\customer\bean\Customer.class
+com\fortest\myorders\customer\controller\CustomerController.class
+com\fortest\myorders\customer\repository\CustomerRepository.class
+com\fortest\myorders\customer\request\CustomerRequest.class
+com\fortest\myorders\customer\CustomerApplication.class
+com\fortest\myorders\customer\bean\Customer$CustomerBuilder.class
+com\fortest\myorders\customer\service\CustomerService.class
+com\fortest\myorders\customer\request\CustomerRequest$CustomerRequestBuilder.class

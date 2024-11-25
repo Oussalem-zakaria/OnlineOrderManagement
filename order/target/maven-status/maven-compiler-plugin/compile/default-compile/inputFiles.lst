@@ -1,0 +1,15 @@
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\beans\Order.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\request\OrderRequest.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\dtos\CustomerDTO.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\service\OrderService.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\dtos\ProductDTO.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\dtos\ResponseDto.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\controller\OrderController.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\request\OrderItemRequest.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\config\LoadBalancerConfig.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\beans\OrderItem.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\clients\ProductClient.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\dtos\OrderItemDTO.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\OrderApplication.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\clients\CustomerClient.java
+C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\repository\OrderRepository.java

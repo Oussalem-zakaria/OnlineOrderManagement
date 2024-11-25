@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "customerId": 1,
+    "orderItems": [
+      {
+        "id": 1,
+        "productId": 1,
+        "quantity": 10.0
+      },
+      {
+        "id": 2,
+        "productId": 2,
+        "quantity": 5.0
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "customerId": 2,
+    "orderItems": [
+      {
+        "id": 102,
+        "productId": 2,
+        "quantity": 2.0
+      }
+    ]
+  }
+]

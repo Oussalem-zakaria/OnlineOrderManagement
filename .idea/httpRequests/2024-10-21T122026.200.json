@@ -1,0 +1,31 @@
+{
+  "id": 1,
+  "orderItems": [
+    {
+      "id": 1,
+      "products": {
+        "id": 1,
+        "name": "pord 1",
+        "description": "desc prod 1",
+        "price": 100.0
+      },
+      "quantity": 10.0
+    },
+    {
+      "id": 2,
+      "products": {
+        "id": 2,
+        "name": "pord 2",
+        "description": "desc prod 2",
+        "price": 120.0
+      },
+      "quantity": 5.0
+    }
+  ],
+  "customer": {
+    "id": 1,
+    "firstName": "zakaria",
+    "lastName": "oussalem",
+    "email": "zakrayaoussalem@gmail.com"
+  }
+}
