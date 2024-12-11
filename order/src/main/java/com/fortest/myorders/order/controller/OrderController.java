@@ -1,12 +1,11 @@
 package com.fortest.myorders.order.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.fortest.myorders.order.beans.Order;
 import com.fortest.myorders.order.dtos.ResponseDto;
@@ -17,16 +16,21 @@ import com.fortest.myorders.order.service.OrderService;
 @RequestMapping("/api/v1/orders")
 public class OrderController {
 
-    @Autowired
     private OrderService orderService;
 
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Order> createOrder(@RequestBody OrderRequest orderRequest) {
         Order newOrder = orderService.createOrder(orderRequest);
         return ResponseEntity.status(201).body(newOrder);
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<Order>> getAllOrders() {
         List<Order> orders = orderService.getAllOrders();
         return ResponseEntity.ok(orders);
@@ -40,18 +44,21 @@ public class OrderController {
     // }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<ResponseDto> getOrder(@PathVariable Integer id) {
         ResponseDto responseDto = orderService.getOrder(id);
         return ResponseEntity.ok(responseDto);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Order> updateOrder(@PathVariable Integer id, @RequestBody OrderRequest orderRequest) {
         Optional<Order> updatedOrder = orderService.updateOrder(id, orderRequest);
         return updatedOrder.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Void> deleteOrder(@PathVariable Integer id) {
         if (orderService.getOrderById(id).isPresent()) {
             orderService.deleteOrder(id);

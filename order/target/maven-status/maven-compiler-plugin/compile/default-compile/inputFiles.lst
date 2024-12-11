@@ -1,15 +1,17 @@
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\beans\Order.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\request\OrderRequest.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\dtos\CustomerDTO.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\service\OrderService.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\dtos\ProductDTO.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\dtos\ResponseDto.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\controller\OrderController.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\request\OrderItemRequest.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\config\LoadBalancerConfig.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\beans\OrderItem.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\clients\ProductClient.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\dtos\OrderItemDTO.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\OrderApplication.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\clients\CustomerClient.java
-C:\Users\DZIKO\Desktop\My Docs\Cours\MicroServices\myordersservices\myordersservices\order\src\main\java\com\fortest\myorders\order\repository\OrderRepository.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\Security\SecurityConfig.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\controller\OrderController.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\config\LoadBalancerConfig.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\service\OrderService.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\request\OrderRequest.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\Security\JwtAuthConverter.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\beans\OrderItem.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\clients\ProductClient.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\dtos\ResponseDto.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\request\OrderItemRequest.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\clients\UserClient.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\dtos\ProductDTO.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\dtos\OrderItemDTO.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\repository\OrderRepository.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\beans\Order.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\dtos\UserDTO.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\OrderApplication.java

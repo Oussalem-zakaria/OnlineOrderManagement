@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class OrderItemRequest {
     private Integer productId;
     private Double quantity;
+    private Double price;
 }

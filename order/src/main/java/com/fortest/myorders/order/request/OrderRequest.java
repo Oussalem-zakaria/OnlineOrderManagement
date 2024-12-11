@@ -14,4 +14,5 @@ import java.util.List;
 public class OrderRequest {
     private Integer customerId;
     private List<OrderItemRequest> orderItems;
+    private Double total_price;
 }

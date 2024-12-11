@@ -1,6 +1,5 @@
 package com.fortest.myorders.product.service;
 
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +25,9 @@ public class ProductService {
 
         return productRepository.saveAndFlush(customer);
 
-
     }
 
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
@@ -41,6 +39,8 @@ public class ProductService {
         return productRepository.findById(id).map(product -> {
             product.setName(productRequest.getName());
             product.setDescription(productRequest.getDescription());
+            product.setPrice(productRequest.getPrice());
+            product.setStock_quantity(productRequest.getStock_quantity());
             return productRepository.save(product);
         }).orElseThrow(() -> new RuntimeException("Product not found"));
     }

@@ -8,3 +8,9 @@ spring:
     import: optional:configserver:${CONFIG_SERVICE_URL:http://localhost:8888}
   profiles:
     active: dev
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwt-issue-uri: http://localhost:8080/realms/OnlineOrderManagement-Realm
+          jwk-set-uri: http://localhost:8080/realms/OnlineOrderManagement-Realm/protocol/openid-connect/certs

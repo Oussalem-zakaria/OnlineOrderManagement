@@ -16,24 +16,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "order_items")
 public class OrderItem {
-    @Id
-    @SequenceGenerator(
-            name = "order_item_id_sequence",
-            sequenceName = "order_item_id_sequence"
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "order_item_id_sequence"
-    )
-    private Integer id;
+        @Id
+        @SequenceGenerator(name = "order_item_id_sequence", sequenceName = "order_item_id_sequence")
+        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_item_id_sequence")
+        private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    @JsonBackReference
-    private Order order;
+        @ManyToOne
+        @JoinColumn(name = "order_id")
+        @JsonBackReference
+        private Order order;
 
-    private Integer productId;
+        private Integer productId;
 
-    private Double quantity;
+        private Double quantity;
+        private Double price;
 
 }

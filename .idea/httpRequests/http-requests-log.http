@@ -1,3 +1,16 @@
+POST http://localhost:8080/realms/OnlineOrderManagement-Realm/protocol/openid-connect/token
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 87
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+grant_type=password&client_id=OnlineOrderManagement-Client&username=user1&password=1234
+
+<> 2024-12-06T155925.400.json
+
+###
+
 GET http://localhost:8083/api/v1/orders/102
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.3
 Accept-Encoding: br, deflate, gzip, x-gzip

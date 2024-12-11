@@ -5,7 +5,6 @@ com\fortest\myorders\order\request\OrderRequest$OrderRequestBuilder.class
 com\fortest\myorders\order\dtos\ProductDTO.class
 com\fortest\myorders\order\controller\OrderController.class
 com\fortest\myorders\order\dtos\OrderItemDTO$OrderItemDTOBuilder.class
-com\fortest\myorders\order\dtos\CustomerDTO.class
 com\fortest\myorders\order\request\OrderRequest.class
 com\fortest\myorders\order\repository\OrderRepository.class
 com\fortest\myorders\order\config\LoadBalancerConfig.class
@@ -15,6 +14,5 @@ com\fortest\myorders\order\dtos\ResponseDto.class
 com\fortest\myorders\order\beans\Order$OrderBuilder.class
 com\fortest\myorders\order\clients\ProductClient.class
 com\fortest\myorders\order\request\OrderItemRequest$OrderItemRequestBuilder.class
-com\fortest\myorders\order\clients\CustomerClient.class
 com\fortest\myorders\order\service\OrderService.class
 com\fortest\myorders\order\beans\Order.class

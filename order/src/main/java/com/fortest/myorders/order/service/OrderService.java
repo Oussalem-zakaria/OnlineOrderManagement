@@ -1,11 +1,10 @@
 package com.fortest.myorders.order.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.fortest.myorders.order.beans.Order;
 import com.fortest.myorders.order.beans.OrderItem;
+import com.fortest.myorders.order.clients.AuditServiceClient;
 import com.fortest.myorders.order.clients.CustomerClient;
 import com.fortest.myorders.order.clients.ProductClient;
 import com.fortest.myorders.order.dtos.CustomerDTO;
@@ -13,6 +12,7 @@ import com.fortest.myorders.order.dtos.OrderItemDTO;
 import com.fortest.myorders.order.dtos.ProductDTO;
 import com.fortest.myorders.order.dtos.ResponseDto;
 import com.fortest.myorders.order.repository.OrderRepository;
+import com.fortest.myorders.order.request.AuditLogRequest;
 import com.fortest.myorders.order.request.OrderRequest;
 
 import java.util.List;
@@ -22,19 +22,17 @@ import java.util.stream.Collectors;
 @Service
 public class OrderService {
 
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
+    private final OrderRepository orderRepository;
     private final ProductClient productClient;
     private final CustomerClient customerClient;
-    private final RestTemplate restTemplate;
+    private final AuditServiceClient auditServiceClient;
 
     public OrderService(ProductClient productClient, OrderRepository orderRepository, CustomerClient customerClient,
-            RestTemplate restTemplate) {
+            AuditServiceClient auditServiceClient) {
         this.productClient = productClient;
         this.orderRepository = orderRepository;
         this.customerClient = customerClient;
-        this.restTemplate = restTemplate;
+        this.auditServiceClient = auditServiceClient;
     }
 
     public Order createOrder(OrderRequest orderRequest) {
@@ -49,6 +47,10 @@ public class OrderService {
                 throw new RuntimeException("Product not found with ID: " + orderItemRequest.getProductId());
             }
 
+            if (orderItemRequest.getQuantity() > product.getStock_quantity()) {
+                throw new RuntimeException("Product quantity not available");
+            }
+
             return OrderItem.builder()
                     .order(null)
                     .productId(orderItemRequest.getProductId())
@@ -59,18 +61,42 @@ public class OrderService {
         Order order = Order.builder()
                 .customerId(orderRequest.getCustomerId())
                 .orderItems(orderItems)
+                .status("CREATED")
+                .total_price(orderRequest.getTotal_price())
                 .build();
 
         orderItems.forEach(orderItem -> orderItem.setOrder(order));
 
-        return orderRepository.save(order);
+        Order savedOrder = orderRepository.save(order);
+
+        // Process the order (audit log entry)
+        processOrder(savedOrder);
+
+        return savedOrder;
+    }
+
+    public void processOrder(Order order) {
+        try {
+            // Préparer la requête pour AuditService
+            AuditLogRequest auditLogRequest = new AuditLogRequest();
+            auditLogRequest.setUserId(order.getCustomerId().toString());
+            auditLogRequest.setAction("CREATE_ORDER");
+            auditLogRequest.setEntityType("Order");
+            auditLogRequest.setEntityId(order.getId().toString());
+
+            // Appeler le service d'audit via Feign
+            System.out.println("Saving audit log ZIKO******1" + auditLogRequest.getAction());
+            auditServiceClient.createAuditLog(auditLogRequest);
+        } catch (Exception e) {
+            // En cas d'erreur, afficher un message dans les logs
+            System.err.println("Erreur lors de l'enregistrement dans le service d'audit : " + e.getMessage());
+        }
     }
 
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
 
-    // Get a specific order by ID
     public Optional<Order> getOrderById(Integer id) {
         return orderRepository.findById(id);
     }
@@ -89,10 +115,8 @@ public class OrderService {
         return responseDto;
     }
 
-    // Update an existing order
     public Optional<Order> updateOrder(Integer id, OrderRequest orderRequest) {
         return orderRepository.findById(id).map(order -> {
-            // Update orderItems
             List<OrderItem> orderItems = orderRequest.getOrderItems().stream()
                     .map(orderItemRequest -> OrderItem.builder()
                             .order(order)
@@ -110,20 +134,11 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
 
-    // public ProductDTO fetchProduct(Integer productId) {
-    // return productClient.getProductById(productId);
-    // }
     public ProductDTO fetchProduct(Integer productId) {
-        String productServiceUrl = "http://PRODUCT/api/v1/products/" + productId;
-        return restTemplate.getForObject(productServiceUrl, ProductDTO.class);
+        return productClient.getProductById(productId);
     }
 
-    // public CustomerDTO fetchCustomer(Integer customerId) {
-    // return customerClient.getCustomerById(customerId);
-    // }
     public CustomerDTO fetchCustomer(Integer customerId) {
-        String customerServiceUrl = "http://CUSTOMER/api/v1/customers/" + customerId;
-        return restTemplate.getForObject(customerServiceUrl, CustomerDTO.class);
+        return customerClient.getCustomerById(customerId);
     }
-
 }

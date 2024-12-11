@@ -2,10 +2,27 @@ server:
   port: 8765
 
 spring:
-  application:
-    name: api-gateway
-
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: OnlineOrderManagement-Client
+            client-secret: your-client-secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/OnlineOrderManagement-Realm
 eureka:
   client:
     service-url:
+      # defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8761/eureka}
       defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8761/eureka}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
