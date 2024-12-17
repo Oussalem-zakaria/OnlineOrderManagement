@@ -37,6 +37,10 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
 
+    public Optional<Customer> getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
+    }
+
     public Customer updateCustomer(Integer id, CustomerRequest request) {
         return customerRepository.findById(id).map(customer -> {
             customer.setFirstName(request.getFirstName());

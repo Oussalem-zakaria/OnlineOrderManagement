@@ -31,6 +31,19 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newCustomer);
     }
 
+    @PostMapping("/self-register")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<Customer> selfRegisterCustomer(@RequestBody CustomerRequest customerRequest) {
+        log.info("User self-registering: {}", customerRequest);
+        // Vérifiez si l'utilisateur existe déjà dans la base
+        if (customerService.getCustomerByEmail(customerRequest.getEmail()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+        // Ajouter le client
+        Customer newCustomer = customerService.createCustomer(customerRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newCustomer);
+    }
+
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<Customer>> getAllCustomers() {
@@ -42,6 +55,15 @@ public class CustomerController {
     @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Customer> getCustomerById(@PathVariable Integer id) {
         return customerService.getCustomerById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // get customer by email
+    @GetMapping("/email/{email}")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<Customer> getCustomerByEmail(@PathVariable String email) {
+        return customerService.getCustomerByEmail(email)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

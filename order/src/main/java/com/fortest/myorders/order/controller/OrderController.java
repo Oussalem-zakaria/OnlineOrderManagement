@@ -23,14 +23,14 @@ public class OrderController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Order> createOrder(@RequestBody OrderRequest orderRequest) {
         Order newOrder = orderService.createOrder(orderRequest);
         return ResponseEntity.status(201).body(newOrder);
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')")
     public ResponseEntity<List<Order>> getAllOrders() {
         List<Order> orders = orderService.getAllOrders();
         return ResponseEntity.ok(orders);
@@ -44,14 +44,22 @@ public class OrderController {
     // }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')")
     public ResponseEntity<ResponseDto> getOrder(@PathVariable Integer id) {
         ResponseDto responseDto = orderService.getOrder(id);
         return ResponseEntity.ok(responseDto);
     }
 
+    // Récupérer les commandes par customerId
+    @GetMapping("/customer/{customerId}")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<List<Order>> getOrdersByCustomer(@PathVariable Integer customerId) {
+        List<Order> orders = orderService.getOrdersByCustomerId(customerId);
+        return ResponseEntity.ok(orders);
+    }
+
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Order> updateOrder(@PathVariable Integer id, @RequestBody OrderRequest orderRequest) {
         Optional<Order> updatedOrder = orderService.updateOrder(id, orderRequest);
         return updatedOrder.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());

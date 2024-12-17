@@ -1,40 +1,40 @@
 services:
   # Eureka server service
-  # eureka-server:
-  #   build: ./eureka-server
-  #   container_name: eureka-server
-  #   ports:
-  #     - "8761:8761"
-  #   expose:
-  #     - "8761"
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
-  #     interval: 10s
-  #     retries: 4
-  #     start_period: 30s
-  #   networks:
-  #     - app-network
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    expose:
+      - "8761"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 10s
+      retries: 4
+      start_period: 30s
+    networks:
+      - app-network
 
   # Config server service
-  # config-server:
-  #   build: ./config-server
-  #   container_name: config-server
-  #   ports:
-  #     - "8888:8888"
-  #   expose:
-  #     - "8888"
-  #   environment:
-  #     - DISCOVERY_SERVICE_URL=http://eureka-server:8761/eureka
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
-  #     interval: 10s
-  #     retries: 4
-  #     start_period: 30s
-  #   depends_on:
-  #     eureka-server:
-  #       condition: service_healthy
-  #   networks:
-  #     - app-network
+  config-server:
+    build: ./config-server
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    expose:
+      - "8888"
+    environment:
+      - DISCOVERY_SERVICE_URL=http://eureka-server:8761/eureka
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
+      interval: 10s
+      retries: 4
+      start_period: 30s
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    networks:
+      - app-network
 
   # PostgreSQL service
   postgres-db:
@@ -59,168 +59,168 @@ services:
       - app-network
 
   # Order service
-  # order-service:
-  #   build: ./order
-  #   container_name: order-service
-  #   ports:
-  #     - "8083:8083"
-  #   expose:
-  #     - "8083"
-  #   environment:
-  #     - DISCOVERY_SERVICE_URL=http://eureka-server:8761/eureka
-  #     - CONFIG_SERVICE_URL=http://config-server:8888
-  #     - ADMIN_SERVER_URL=http://admin-server:8085
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ordersdb
-  #     - SPRING_DATASOURCE_USERNAME=postgres
-  #     - SPRING_DATASOURCE_PASSWORD=password
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
-  #     interval: 10s
-  #     retries: 4
-  #     start_period: 30s
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     postgres-db:
-  #       condition: service_healthy
-  #   networks:
-  #     - app-network
+  order-service:
+    build: ./order
+    container_name: order-service
+    ports:
+      - "8083:8083"
+    expose:
+      - "8083"
+    environment:
+      - DISCOVERY_SERVICE_URL=http://eureka-server:8761/eureka
+      - CONFIG_SERVICE_URL=http://config-server:8888
+      - ADMIN_SERVER_URL=http://admin-server:8085
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ordersdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
+      interval: 10s
+      retries: 4
+      start_period: 30s
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+    networks:
+      - app-network
 
   # user service
-  # user-service:
-  #   build: ./user
-  #   container_name: user-service
-  #   ports:
-  #     - "8081:8081"
-  #   expose:
-  #     - "8081"
-  #   environment:
-  #     - DISCOVERY_SERVICE_URL=http://eureka-server:8761/eureka
-  #     - CONFIG_SERVICE_URL=http://config-server:8888
-  #     - ADMIN_SERVER_URL=http://admin-server:8085
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ordersdb
-  #     - SPRING_DATASOURCE_USERNAME=postgres
-  #     - SPRING_DATASOURCE_PASSWORD=password
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
-  #     interval: 10s
-  #     retries: 4
-  #     start_period: 30s
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     postgres-db:
-  #       condition: service_healthy
-  #   networks:
-  #     - app-network
+  user-service:
+    build: ./user
+    container_name: user-service
+    ports:
+      - "8081:8081"
+    expose:
+      - "8081"
+    environment:
+      - DISCOVERY_SERVICE_URL=http://eureka-server:8761/eureka
+      - CONFIG_SERVICE_URL=http://config-server:8888
+      - ADMIN_SERVER_URL=http://admin-server:8085
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ordersdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      interval: 10s
+      retries: 4
+      start_period: 30s
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+    networks:
+      - app-network
 
   # Product service
-  # product-service:
-  #   build: ./product
-  #   container_name: product-service
-  #   ports:
-  #     - "8082:8082"
-  #   expose:
-  #     - "8082"
-  #   environment:
-  #     - DISCOVERY_SERVICE_URL=http://eureka-server:8761/eureka
-  #     - CONFIG_SERVICE_URL=http://config-server:8888
-  #     - ADMIN_SERVER_URL=http://admin-server:8085
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ordersdb
-  #     - SPRING_DATASOURCE_USERNAME=postgres
-  #     - SPRING_DATASOURCE_PASSWORD=password
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
-  #     interval: 10s
-  #     retries: 4
-  #     start_period: 30s
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     postgres-db:
-  #       condition: service_healthy
-  #   networks:
-  #     - app-network
+  product-service:
+    build: ./product
+    container_name: product-service
+    ports:
+      - "8082:8082"
+    expose:
+      - "8082"
+    environment:
+      - DISCOVERY_SERVICE_URL=http://eureka-server:8761/eureka
+      - CONFIG_SERVICE_URL=http://config-server:8888
+      - ADMIN_SERVER_URL=http://admin-server:8085
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ordersdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+      interval: 10s
+      retries: 4
+      start_period: 30s
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+    networks:
+      - app-network
 
-  # Audit-service:
-  #   build: ./audit
-  #   container_name: audit-service
-  #   ports:
-  #     - "8084:8084"
-  #   expose:
-  #     - "8084"
-  #   environment:
-  #     - DISCOVERY_SERVICE_URL=http://eureka-server:8761/eureka
-  #     - CONFIG_SERVICE_URL=http://config-server:8888
-  #     - ADMIN_SERVER_URL=http://admin-server:8085
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ordersdb
-  #     - SPRING_DATASOURCE_USERNAME=postgres
-  #     - SPRING_DATASOURCE_PASSWORD=password
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
-  #     interval: 10s
-  #     retries: 4
-  #     start_period: 30s
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     postgres-db:
-  #       condition: service_healthy
-  #   networks:
-  #     - app-network
+  Audit-service:
+    build: ./audit
+    container_name: audit-service
+    ports:
+      - "8084:8084"
+    expose:
+      - "8084"
+    environment:
+      - DISCOVERY_SERVICE_URL=http://eureka-server:8761/eureka
+      - CONFIG_SERVICE_URL=http://config-server:8888
+      - ADMIN_SERVER_URL=http://admin-server:8085
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/ordersdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+      interval: 10s
+      retries: 4
+      start_period: 30s
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+    networks:
+      - app-network
 
   # Gateway service
-  # gateway-service:
-  #   build: ./api-gateway
-  #   container_name: gateway-service
-  #   ports:
-  #     - "8765:8765"
-  #   expose:
-  #     - "8765"
-  #   environment:
-  #     - DISCOVERY_SERVICE_URL=http://eureka-server:8761/eureka
-  #     - CONFIG_SERVICE_URL=http://config-server:8888
-  #     - ADMIN_SERVER_URL=http://admin-server:8085
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8765/actuator/health"]
-  #     interval: 10s
-  #     retries: 4
-  #     start_period: 30s
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #   networks:
-  #     - app-network
+  gateway-service:
+    build: ./api-gateway
+    container_name: gateway-service
+    ports:
+      - "8765:8765"
+    expose:
+      - "8765"
+    environment:
+      - DISCOVERY_SERVICE_URL=http://eureka-server:8761/eureka
+      - CONFIG_SERVICE_URL=http://config-server:8888
+      - ADMIN_SERVER_URL=http://admin-server:8085
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8765/actuator/health"]
+      interval: 10s
+      retries: 4
+      start_period: 30s
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+    networks:
+      - app-network
 
   # Admin server (commented out)
-  # admin-server:
-  #   build: ./admin-server
-  #   container_name: admin-server
-  #   ports:
-  #     - "8085:8085"
-  #   expose:
-  #     - "8085"
-  #   environment:
-  #     - DISCOVERY_SERVICE_URL=http://eureka-server:8761
-  #     - CONFIG_SERVICE_URL=http://config-server:8888
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8085/actuator/health"]
-  #     interval: 10s
-  #     retries: 4
-  #     start_period: 30s
-  #   depends_on:
-  #     eureka-server:
-  #       condition: service_healthy
+  admin-server:
+    build: ./admin-server
+    container_name: admin-server
+    ports:
+      - "8085:8085"
+    expose:
+      - "8085"
+    environment:
+      - DISCOVERY_SERVICE_URL=http://eureka-server:8761
+      - CONFIG_SERVICE_URL=http://config-server:8888
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8085/actuator/health"]
+      interval: 10s
+      retries: 4
+      start_period: 30s
+    depends_on:
+      eureka-server:
+        condition: service_healthy
 
 # Volumes for PostgreSQL data persistence
 volumes:

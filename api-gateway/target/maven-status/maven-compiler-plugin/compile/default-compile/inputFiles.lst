@@ -1,3 +1,2 @@
 F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\api-gateway\src\main\java\com\fortest\myorders\apigateway\ApiGateWayApplication.java
-F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\api-gateway\src\main\java\com\fortest\myorders\apigateway\Security\JwtAuthConverter.java
-F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\api-gateway\src\main\java\com\fortest\myorders\apigateway\Security\SecurityConfig.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\api-gateway\src\main\java\com\fortest\myorders\apigateway\Security\CorsConfig.java

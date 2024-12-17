@@ -22,4 +22,10 @@ public class Product {
         private String description;
         private Double price;
         private Integer stock_quantity;
+        private String category;
+        
+        private String imageName;
+        private String imageType;
+        @Lob
+        private byte[] imageData;
 }

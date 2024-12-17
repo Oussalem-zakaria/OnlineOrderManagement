@@ -55,19 +55,31 @@ public class OrderService {
                     .order(null)
                     .productId(orderItemRequest.getProductId())
                     .quantity(orderItemRequest.getQuantity())
+                    .price(orderItemRequest.getPrice())
                     .build();
         }).collect(Collectors.toList());
 
+        // Créer et sauvegarder la commande
         Order order = Order.builder()
-                .customerId(orderRequest.getCustomerId())
-                .orderItems(orderItems)
-                .status("CREATED")
-                .total_price(orderRequest.getTotal_price())
-                .build();
+            .customerId(orderRequest.getCustomerId())
+            .orderItems(orderItems)
+            .status("En attente")
+            .total_price(orderRequest.getTotal_price())
+            .build();
 
         orderItems.forEach(orderItem -> orderItem.setOrder(order));
 
         Order savedOrder = orderRepository.save(order);
+
+        // Mettre à jour les stocks des produits
+        orderItems.forEach(orderItem -> {
+            try {
+                productClient.updateProductStock(orderItem.getProductId(), orderItem.getQuantity());
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to update product stock for Product ID: " + orderItem.getProductId(),
+                        e);
+            }
+        });
 
         // Process the order (audit log entry)
         processOrder(savedOrder);
@@ -101,6 +113,18 @@ public class OrderService {
         return orderRepository.findById(id);
     }
 
+    // Récupérer les commandes par customerId
+    public List<Order> getOrdersByCustomerId(Integer customerId) {
+        // Vérification si le client existe via CustomerClient
+        CustomerDTO customer = fetchCustomer(customerId);
+        if (customer == null) {
+            throw new RuntimeException("Customer not found with ID: " + customerId);
+        }
+
+        // Retourner la liste des commandes pour ce client
+        return orderRepository.findByCustomerId(customerId);
+    }
+
     public ResponseDto getOrder(Integer id) {
         Order order = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
         ResponseDto responseDto = new ResponseDto();
@@ -117,15 +141,28 @@ public class OrderService {
 
     public Optional<Order> updateOrder(Integer id, OrderRequest orderRequest) {
         return orderRepository.findById(id).map(order -> {
-            List<OrderItem> orderItems = orderRequest.getOrderItems().stream()
-                    .map(orderItemRequest -> OrderItem.builder()
-                            .order(order)
-                            .productId(orderItemRequest.getProductId())
-                            .quantity(orderItemRequest.getQuantity())
-                            .build())
-                    .collect(Collectors.toList());
-            order.setOrderItems(orderItems);
+            // Mettre à jour les propriétés de la commande
             order.setCustomerId(orderRequest.getCustomerId());
+            order.setTotal_price(orderRequest.getTotal_price());
+            order.setStatus(orderRequest.getStatus());
+
+            // Mettre à jour les orderItems
+            List<OrderItem> existingOrderItems = order.getOrderItems();
+
+            // Effacer les orderItems obsolètes
+            existingOrderItems.clear();
+
+            // Ajouter les nouveaux orderItems
+            orderRequest.getOrderItems().forEach(orderItemRequest -> {
+                OrderItem orderItem = OrderItem.builder()
+                        .order(order) // Lier à la commande actuelle
+                        .productId(orderItemRequest.getProductId())
+                        .quantity(orderItemRequest.getQuantity())
+                        .price(orderItemRequest.getPrice())
+                        .build();
+                existingOrderItems.add(orderItem);
+            });
+
             return orderRepository.save(order);
         });
     }

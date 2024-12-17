@@ -2,19 +2,22 @@ server:
   port: 8765
 
 spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          keycloak:
-            client-id: OnlineOrderManagement-Client
-            client-secret: your-client-secret
-            authorization-grant-type: authorization_code
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-            scope: openid
-        provider:
-          keycloak:
-            issuer-uri: http://localhost:8080/realms/OnlineOrderManagement-Realm
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          "[/**]": # Appliquer à toutes les routes
+            allowedOrigins:
+              - "http://localhost:3000" # Autoriser uniquement React sur le port 3000
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders: "*"
+            allowCredentials: true
 eureka:
   client:
     service-url:

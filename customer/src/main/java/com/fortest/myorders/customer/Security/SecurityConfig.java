@@ -29,9 +29,9 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(crsf -> crsf.disable())
                 // Ajoute les règles CORS à la configuration de sécurité
-                .cors()
-                .configurationSource(corsConfigurationSource())
-                .and()
+                // .cors()
+                // .configurationSource(corsConfigurationSource())
+                // .and()
                 // Configuration d'authentification via JWT
 
                 .authorizeRequests(ar -> ar.anyRequest().authenticated())
@@ -39,16 +39,18 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setExposedHeaders(Arrays.asList("*"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+    // @Bean
+    // CorsConfigurationSource corsConfigurationSource() {
+    // CorsConfiguration configuration = new CorsConfiguration();
+    // configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+    // configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT",
+    // "DELETE"));
+    // configuration.setAllowedHeaders(Arrays.asList("*"));
+    // configuration.setExposedHeaders(Arrays.asList("*"));
+    // UrlBasedCorsConfigurationSource source = new
+    // UrlBasedCorsConfigurationSource();
+    // source.registerCorsConfiguration("/**", configuration);
+    // return source;
+    // }
 
 }
