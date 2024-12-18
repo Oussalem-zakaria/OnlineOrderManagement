@@ -1,5 +1,10 @@
 F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\Security\SecurityConfig.java
 F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\controller\OrderController.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\clients\CustomerClient.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\config\FeignClientConfig.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\clients\AuditServiceClient.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\dtos\CustomerDTO.java
+F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\request\AuditLogRequest.java
 F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\config\LoadBalancerConfig.java
 F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\service\OrderService.java
 F:\all zk\My Docs\Cours\MicroServices\projet\OnlineOrderManagement\OnlineOrderManagement\order\src\main\java\com\fortest\myorders\order\request\OrderRequest.java

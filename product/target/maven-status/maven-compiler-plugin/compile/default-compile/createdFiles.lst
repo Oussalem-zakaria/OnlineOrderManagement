@@ -1,2 +1,10 @@
+com\fortest\myorders\product\service\ProductService.class
+com\fortest\myorders\product\ProductApplication.class
+com\fortest\myorders\product\repository\ProductRepository.class
+com\fortest\myorders\product\request\ProductRequest$ProductRequestBuilder.class
+com\fortest\myorders\product\Security\JwtAuthConverter.class
+com\fortest\myorders\product\Security\SecurityConfig.class
 com\fortest\myorders\product\bean\Product.class
+com\fortest\myorders\product\request\ProductRequest.class
 com\fortest\myorders\product\bean\Product$ProductBuilder.class
+com\fortest\myorders\product\controller\ProductController.class
