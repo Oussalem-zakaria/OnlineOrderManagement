@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.fortest.myorders.order.config.FeignClientConfig;
 import com.fortest.myorders.order.request.AuditLogRequest;
 
-@FeignClient(value = "AUDIT", url = "http://localhost:8084", configuration = FeignClientConfig.class)
+@FeignClient(value = "AUDIT", url = "http://audit-service:8084", configuration = FeignClientConfig.class)
 public interface AuditServiceClient {
 
     @PostMapping("/api/v1/audit")

@@ -11,7 +11,7 @@ import com.fortest.myorders.order.dtos.ProductDTO;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
-@FeignClient(value = "PRODUCT", url = "http://localhost:8082", configuration = FeignClientConfig.class)
+@FeignClient(value = "PRODUCT", url = "http://product-service:8082", configuration = FeignClientConfig.class)
 public interface ProductClient {
     @GetMapping("/api/v1/products/{id}")
     @CircuitBreaker(name = "product", fallbackMethod = "getDefaultProduct")

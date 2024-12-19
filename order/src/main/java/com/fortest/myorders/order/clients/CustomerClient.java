@@ -9,7 +9,7 @@ import com.fortest.myorders.order.dtos.CustomerDTO;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
-@FeignClient(value = "CUSTOMER", url = "http://localhost:8081", configuration = FeignClientConfig.class)
+@FeignClient(value = "CUSTOMER", url = "http://customer-service:8081", configuration = FeignClientConfig.class)
 public interface CustomerClient {
 
     @GetMapping("/api/v1/customers/{id}")

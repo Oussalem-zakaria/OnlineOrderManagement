@@ -266,7 +266,7 @@ services:
       context: ./keycloak-react-example
       dockerfile: Dockerfile
     ports:
-      - "3000:80" # Mappe le port 80 (NGINX) au port 3000 de votre machine
+      - "3000:3000"
     networks:
       - app-network
     depends_on:
